@@ -2,6 +2,33 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>for you to choose photos to upload</string>
+	<key>NSCameraUsageDescription</key>
+	<string>for capturing photos</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.294208171006-85v4guooflkqpolt2bi6p9eiclp7nond</string>
+				<string>fb172286085434593</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>172286085434593</string>
+	<key>FacebookClientToken</key>
+	<string>d245bbb7d61eee0998cc40d3234e8a4f</string>
+	<key>FacebookDisplayName</key>
+	<string>Instagram Clone App (IOS 16)</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

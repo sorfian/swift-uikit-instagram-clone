@@ -7,6 +7,9 @@
 
 import UIKit
 import CoreData
+import Firebase
+import FacebookCore
+import GoogleSignIn
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,7 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // Set up the style and color of the common UI elements
+        customizeUIStyle()
+        
+        // Configure Firebase
+        FirebaseApp.configure()
+        
+        // Configure Facebook
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        
         return true
     }
 
@@ -79,3 +91,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension AppDelegate {
+    func customizeUIStyle() {
+        
+        // Customize Navigation bar items
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Avenir", size: 16)!, NSAttributedString.Key.foregroundColor: UIColor.white], for: UIControl.State.normal)
+        
+        func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+            
+            var handled: Bool = false
+            
+            if url.absoluteString.contains("fb") {
+                handled = ApplicationDelegate.shared.application(
+                            app,
+                            open: url,
+                            sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+                            annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+                )
+            } else {
+                handled = GIDSignIn.sharedInstance.handle(url)
+            }
+            
+            return handled
+        }
+    }
+}
